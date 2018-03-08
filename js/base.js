@@ -30,19 +30,34 @@ $(document).ready(function() {
     hljs.initHighlightingOnLoad();
     $('table').addClass('table table-striped table-hover');
 
-    // Improve the scrollspy behaviour when users click on a TOC item.
-    $(".bs-sidenav a").on("click", function() {
-        var clicked = this;
-        setTimeout(function() {
-            var active = $('.nav li.active a');
-            active = active[active.length - 1];
-            if (clicked !== active) {
-                $(active).parent().removeClass("active");
-                $(clicked).parent().addClass("active");
-            }
-        }, 50);
+
+    $('body').on('click', 'img', function(){
+        window.open($(this).attr('src'));
     });
 
+    $('body').on('click', 'h2', function(){
+        document.location.hash = $(this).attr('id');
+    });
+
+
+    $('body').on('click', 'a', function(e){
+        var href = $(this).attr('href');
+        if(href.indexOf('http') == 0) {
+            $(this).attr('target', '_blank');
+        }
+    });
+
+    $('body').on('submit', '#search-form', function(e){
+        $('#mkdocs_search_modal').show();
+        $('#mkdocs-search-query').val($('#mkdocs-search-query-input').val());
+        console.log($('#mkdocs-search-query'));
+        $('#mkdocs-search-query').focus().keyup();
+        e.preventDefault();
+    });
+
+    $('body').on('click', '.close', function(e){
+        $('#mkdocs_search_modal').hide();
+    });
 });
 
 
@@ -50,13 +65,28 @@ $('body').scrollspy({
     target: '.bs-sidebar',
 });
 
-/* Toggle the `clicky` class on the body when clicking links to let us
-   retrigger CSS animations. See ../css/base.css for more details. */
-$('a').click(function(e) {
-    $('body').toggleClass('clicky');
-});
-
 /* Prevent disabled links from causing a page reload */
 $("li.disabled a").click(function() {
     event.preventDefault();
 });
+
+
+
+
+var searches = document.location.search;
+
+
+var params = {};
+searches.slice(1).split('&').map(function(item){
+    var kv = item.split('=');
+    params[kv[0]] = typeof kv[1] !== "undefined"?kv[1]:'';
+});
+console.log(searches.slice(1).split('&'), params);
+
+if(params.header === '0') {
+    $('#header').hide();
+}
+if(params.nav === '0') {
+    $('.sidebar').hide();
+    $('#main').addClass('fullscreen');
+}
