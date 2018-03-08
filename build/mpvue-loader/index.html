@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="http://mpvue.com/build/mpvue-loader/">
+        <link rel="shortcut icon" href="../../assets/favicon.ico">
+        
+        <title>Mpvue loader - mpvue-docs</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../assets/style.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">mpvue-docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Build <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../">Home</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Mpvue loader</a>
+</li>
+                            
+<li >
+    <a href="../mpvue-webpack-target/">Mpvue webpack target</a>
+</li>
+                            
+<li >
+    <a href="../postcss-mpvue-wxss/">Postcss mpvue wxss</a>
+</li>
+                            
+<li >
+    <a href="../px2rpx-loader/">Px2rpx loader</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mpvue <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../mpvue/">Home</a>
+</li>
+                            
+<li >
+    <a href="../../mpvue/mpvue-template-compiler/">Mpvue template compiler</a>
+</li>
+                            
+<li >
+    <a href="../../mpvue/quickstart/">Quickstart</a>
+</li>
+                            
+<li >
+    <a href="../../mpvue/simple/">Simple</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../mpvue-webpack-target/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#mpvue-loader">mpvue-loader</a></li>
+            <li><a href="#_1">开始</a></li>
+            <li><a href="#_2">特性</a></li>
+            <li><a href="#_3">配置</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.5.28.js"></script>
+
+<script>
+Owl.start({
+    project: 'mpvue-doc',
+    pageUrl: 'build/mpvue-loader'
+})
+</script>
+
+<h1 id="mpvue-loader">mpvue-loader</h1>
+<blockquote>
+<p>我们是在 <a href="https://github.com/vuejs/vue-loader">vue-loader</a> 上做的修改，增加了建构到<code>微信小程序</code> 的若干能力。除此之外与原 <a href="https://vue-loader.vuejs.org/">vue-loader 文档</a> 保持一致，所以本文档只列下修改的地方。</p>
+</blockquote>
+<p>如果你对 <a href="https://vue-loader.vuejs.org/">vue-loader</a>  不是很熟悉的话，强烈建议先阅读原文档一遍，下面的内容会默认你已经知道了什么是 vue-loader 和她能做什么。</p>
+<h2 id="_1">开始</h2>
+<p>mpvue-loader 是 vue-loader 的一个扩展延伸版，类似于超集的关系，除了 vue-loader 本身所具备的能力之外，它还会产出微信小程序所需要的文件结构和模块内容。</p>
+<!-- 其本身依赖 `mpvue-template-compiler` 的各种编译能力。 -->
+
+<h2 id="_2">特性</h2>
+<h3 id="entry">entry</h3>
+<p>它会从 webpack 的配置中的 <code>entry</code> 开始，分析依赖模块，并分别打包。在entry 中 app 属性及其内容会被打包为微信小程序所需要的 <code>app.js／app.json／app.wxss</code>，其余的会生成对应的页面<code>page.js/page.json/page.wxml/page.wxss</code>，如示例的 entry 将会生成如下这些文件，文件内容下文慢慢讲来：</p>
+<pre><code class="javascript">// webpack.config.js
+{
+    // ...
+    entry: {
+        app: resolve('./src/main.js'),               // app 字段被识别为 app 类型
+        list: resolve('./src/pages/list/main.js'),   // 其余字段被识别为 page 类型
+        page1: resolve('./src/pages/page1/main.js')
+    }
+}
+
+// 产出文件的结构
+.
+├── app.js
+├── app.json
+├── app.wxss
+├── components
+│   ├── list$018c4df0.wxml
+│   ├── page1$23e58823.wxml
+├── pages
+│   ├── list
+│   │   ├── list.js
+│   │   ├── list.json
+│   │   ├── list.wxml
+│   │   └── list.wxss
+│   └── page1
+│       ├── page1.js
+│       ├── page1.json
+│       ├── page1.wxml
+│       └── page1.wxss
+└── static
+    ├── assets
+    ├── css
+    │   ├── app.wxss
+    │   ├── list.wxss
+    │   └── page1.wxss
+    └── js
+        ├── app.js
+        ├── list.js
+        ├── page1.js
+        ├── manifest.js
+        └── vendor.js
+</code></pre>
+
+<h3 id="wxml">wxml</h3>
+<p>每一个 <code>.vue</code> 的组件都会被生成为一个 wxml 规范的 template，然后通过 wxml 规范的 import 语法来达到一个复用，同时组件如果涉及到 props 的 data 数据，我们也会做相应的处理，举个实际的例子：</p>
+<pre><code class="html">&lt;template&gt;
+    &lt;div class=&quot;my-component&quot;&gt;
+        &lt;h1&gt;{{msg}}&lt;/h1&gt;
+        &lt;other-component :msg=&quot;msg&quot;&gt;&lt;/other-component&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import otherComponent from './otherComponent.vue'
+
+export default {
+  components: { otherComponent },
+  data () {
+    return { msg: 'Hello Vue.js!' }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<p>这样一个 vue 的组件的模版部分会生成相应的 wxml</p>
+<pre><code class="html">&lt;import src=&quot;components/other-component$hash.wxml&quot; /&gt;
+&lt;template name=&quot;component$hash&quot;&gt;
+    &lt;view class=&quot;my-component&quot;&gt;
+        &lt;view class=&quot;_h1&quot;&gt;{{msg}}&lt;/view&gt;
+        &lt;template is=&quot;other-component$hash&quot; wx:if=&quot;{{ $c[0] }}&quot; data=&quot;{{ ...$c[0] }}&quot;&gt;&lt;/template&gt;
+    &lt;/view&gt;
+&lt;/template&gt;
+</code></pre>
+
+<p>细心的开发者可能已经注意到了 <code>other-component(:msg="msg")</code> 被转化成了 <code>&lt;template is="other-component$hash" data="{{ ...$c[0] }}"&gt;&lt;/template&gt;</code> 。mpvue 在运行时会从根组件开始把所有的组件实例数据合并成一个树形的数据，然后通过 setData 到 appData,<code>$c</code> 是 <code>$children</code> 的缩写。至于那个 <code>0</code> 则是我们的 compiler 处理过后的一个标记，会为每一个子组件打一个特定的不重复的标记。
+树形数据结构如下：</p>
+<pre><code class="javascript">// 这儿数据结构是一个数组，index 是动态的
+{
+  $child: {
+    '0'{
+      // ... root data
+      $child: {
+        '0': {
+          // ... data
+          msg: 'Hello Vue.js!',
+          $child: {
+            // ...data
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+<h3 id="wxss">wxss</h3>
+<p>这个部分的处理同 web 的处理差异不大，唯一不同在于通过配置生成 <code>.css</code> 为 <code>.wxss</code> ，其中的对于 css 的若干处理，在 <a href="../../build/postcss-mpvue-wxss/">postcss-mpvue-wxss</a> 和 <a href="../../build/px2rpx-loader/">px2rpx-loader</a> 这两部分的文档中又详细的介绍。</p>
+<h3 id="appjsonpagejson">app.json／page.json</h3>
+<p>这部分内容来源于 app 和 page 的 entry 文件，通常习惯是 main.js，你需要在你的入口文件中 <code>export default { config: {} }</code>，这才能被我们的 loader 识别为这是一个配置，需要写成 json 文件。</p>
+<pre><code class="javascript">import Vue from 'vue';
+import App from './app';
+
+const vueApp = new Vue(App);
+vueApp.$mount();
+
+// 这个是我们约定的额外的配置
+export default {
+    // 这个字段下的数据会被填充到 app.json ／ page.json
+    config: {
+        pages: ['static/calendar/calendar'， '^pages/list/list'], // Will be filled in webpack
+        window: {
+            backgroundTextStyle: 'light',
+            navigationBarBackgroundColor: '#455A73',
+            navigationBarTitleText: '美团汽车票',
+            navigationBarTextStyle: '#fff'
+        }
+    }
+};
+</code></pre>
+
+<p>同时，这个时候，我们会根据 entry 的页面数据，自动填充到 app.json 中的 <code>pages</code> 字段。
+<code>pages</code> 字段也是可以自定义的，约定带有 <code>^</code> 符号开头的页面，会放到数组的最前面。</p>
+<h3 id="style-scoped">style scoped</h3>
+<p>在 vue-loader 中对 style scoped 的处理方式是给每个样式加一个 attr 来标记 module-id，然后在 css 中也给每条 rule 后添加 <code>[module-id]</code>，最终可以形成一个 css 的“作用域空间”。</p>
+<p>在微信小程序中目前是不支持 attr 选择器的，所以我们做了一点改动，把 attr 上的 <code>[module-id]</code> 直接写到了 class 里，如下：</p>
+<pre><code class="html">&lt;!-- .vue --&gt;
+&lt;template&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        // ...
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+    .container {
+        color: red;
+    }
+&lt;/style&gt;
+
+&lt;!-- vue-loader --&gt;
+&lt;template&gt;
+    &lt;div class=&quot;container&quot; data-v-23e58823&gt;
+        // ...
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+    .container[data-v-23e58823] {
+        color: red;
+    }
+&lt;/style&gt;
+
+&lt;!-- mpvue-loader --&gt;
+&lt;template&gt;
+    &lt;div class=&quot;container data-v-23e58823&quot;&gt;
+        // ...
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+    .container.data-v-23e58823 {
+        color: red;
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h2 id="_3">配置</h2>
+<p>和 vue-loader 用法一致，讲讲额外注意的地方。</p>
+<h3 id="checkmpentry">checkMPEntry</h3>
+<p>在 <a href="../../build/#module">项目建构</a> 文档的这个部分，有讲到需要给所有 <code>js</code> 后缀文件增加 <code>mpvue-loader</code> ，并且需要加 options，通过这个配置，我们的 loader 才能知道 entry 进来的 js 和 vue 的类型是 app 还是 page，从而做了一些页面类型的区分。</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

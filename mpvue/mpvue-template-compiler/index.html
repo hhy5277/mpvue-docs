@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="http://mpvue.com/mpvue/mpvue-template-compiler/">
+        <link rel="shortcut icon" href="../../assets/favicon.ico">
+        
+        <title>Mpvue template compiler - mpvue-docs</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../assets/style.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">mpvue-docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Build <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../build/">Home</a>
+</li>
+                            
+<li >
+    <a href="../../build/mpvue-loader/">Mpvue loader</a>
+</li>
+                            
+<li >
+    <a href="../../build/mpvue-webpack-target/">Mpvue webpack target</a>
+</li>
+                            
+<li >
+    <a href="../../build/postcss-mpvue-wxss/">Postcss mpvue wxss</a>
+</li>
+                            
+<li >
+    <a href="../../build/px2rpx-loader/">Px2rpx loader</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mpvue <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../">Home</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Mpvue template compiler</a>
+</li>
+                            
+<li >
+    <a href="../quickstart/">Quickstart</a>
+</li>
+                            
+<li >
+    <a href="../simple/">Simple</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../quickstart/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#mpvue-template-compiler">mpvue-template-compiler</a></li>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#api">API</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.5.28.js"></script>
+
+<script>
+Owl.start({
+    project: 'mpvue-doc',
+    pageUrl: 'mpvue/mpvue-template-compiler'
+})
+</script>
+
+<h1 id="mpvue-template-compiler">mpvue-template-compiler</h1>
+<blockquote>
+<p>This package is auto-generated. For pull requests please see <a href="https://github.com/Meituan-Dianping/mpvue/blob/master/src/platforms/mp/entry-compiler.js">src/platforms/mp/entry-compiler.js</a>.</p>
+</blockquote>
+<p>This package can be used to pre-compile Vue 2.0 templates into render functions to avoid runtime-compilation overhead and CSP restrictions. You will only need it if you are writing build tools with very specific needs. In most cases you should be using <a href="http://mpvue.com/build-tool/mpvue-loader/">mpvue-loader</a> instead, both of which use this package internally.</p>
+<h2 id="installation">Installation</h2>
+<pre><code class="bash">npm install mpvue-template-compiler
+</code></pre>
+
+<pre><code class="js">const compiler = require('mpvue-template-compiler')
+</code></pre>
+
+<h2 id="api">API</h2>
+<h3 id="compilercompiletemplate-options">compiler.compile(template, [options])</h3>
+<p>Compiles a template string and returns compiled JavaScript code. The returned result is an object of the following format:</p>
+<pre><code class="js">{
+  ast: ?ASTElement, // parsed template elements to AST
+  render: string, // main render function code
+  staticRenderFns: Array&lt;string&gt;, // render code for static sub trees, if any
+  errors: Array&lt;string&gt; // template syntax errors, if any
+}
+</code></pre>
+
+<p>Note the returned function code uses <code>with</code> and thus cannot be used in strict mode code.</p>
+<h4 id="options">Options</h4>
+<p>It's possible to hook into the compilation process to support custom template features. <strong>However, beware that by injecting custom compile-time modules, your templates will not work with other build tools built on standard built-in modules, e.g <code>mpvue-loader</code> and <code>vueify</code>.</strong></p>
+<p>The optional <code>options</code> object can contain the following:</p>
+<ul>
+<li><code>modules</code></li>
+</ul>
+<p>An array of compiler modules. For details on compiler modules, refer to the <code>ModuleOptions</code> type in <a href="https://github.com/vuejs/vue/blob/dev/flow/compiler.js">flow declarations</a> and the <a href="https://github.com/vuejs/vue/tree/dev/src/platforms/web/compiler/modules">built-in modules</a>.</p>
+<ul>
+<li><code>directives</code></li>
+</ul>
+<p>An object where the key is the directive name and the value is a function that transforms an template AST node. For example:</p>
+<p><code>js
+  compiler.compile('&lt;div v-test&gt;&lt;/div&gt;', {
+    directives: {
+      test (node, directiveMeta) {
+        // transform node based on directiveMeta
+      }
+  })</code></p>
+<p>By default, a compile-time directive will extract the directive and the directive will not be present at runtime. If you want the directive to also be handled by a runtime definition, return <code>true</code> in the transform function.</p>
+<p>Refer to the implementation of some <a href="https://github.com/vuejs/vue/tree/dev/src/platforms/web/compiler/directives">built-in compile-time directives</a>.</p>
+<ul>
+<li><code>preserveWhitespace</code></li>
+</ul>
+<p>Defaults to <code>true</code>. This means the compiled render function respects all the whitespaces between HTML tags. If set to <code>false</code>, all whitespaces between tags will be ignored. This can result in slightly better performance but may affect layout for inline elements.</p>
+<hr />
+<h3 id="compilercompiletofunctionstemplate">compiler.compileToFunctions(template)</h3>
+<p>Similar to <code>compiler.compile</code>, but directly returns instantiated functions:</p>
+<pre><code class="js">{
+  render: Function,
+  staticRenderFns: Array&lt;Function&gt;
+}
+</code></pre>
+
+<p>This is only useful at runtime with pre-configured builds, so it doesn't accept any compile-time options. In addition, this method uses <code>new Function()</code> so it is not CSP-compliant.</p>
+<hr />
+<h3 id="compilerssrcompiletemplate-options">compiler.ssrCompile(template, [options])</h3>
+<blockquote>
+<p>2.4.0+</p>
+</blockquote>
+<p>Same as <code>compiler.compile</code> but generates SSR-specific render function code by optimizing parts of the template into string concatenation in order to improve SSR performance.</p>
+<p>This is used by default in <code>vue-loader@&gt;=12</code> and can be disabled using the <a href="https://vue-loader.vuejs.org/en/options.html#optimizessr">optimizeSSR</a> option.</p>
+<hr />
+<h3 id="compilerssrcompiletofunctiontemplate">compiler.ssrCompileToFunction(template)</h3>
+<blockquote>
+<p>2.4.0+</p>
+</blockquote>
+<p>Same as <code>compiler.compileToFunction</code> but generates SSR-specific render function code by optimizing parts of the template into string concatenation in order to improve SSR performance.</p>
+<hr />
+<h3 id="compilerparsecomponentfile-options">compiler.parseComponent(file, [options])</h3>
+<p>Parse a SFC (single-file component, or <code>*.vue</code> file) into a descriptor (refer to the <code>SFCDescriptor</code> type in <a href="https://github.com/vuejs/vue/blob/dev/flow/compiler.js">flow declarations</a>). This is used in SFC build tools like <code>vue-loader</code> and <code>vueify</code>.</p>
+<h4 id="options_1">Options</h4>
+<h4 id="pad"><code>pad</code></h4>
+<p><code>pad</code> is useful when you are piping the extracted content into other pre-processors, as you will get correct line numbers or character indices if there are any syntax errors.</p>
+<ul>
+<li>with <code>{ pad: "line" }</code>, the extracted content for each block will be prefixed with one newline for each line in the leading content from the original file to ensure that the line numbers align with the original file.</li>
+<li>with <code>{ pad: "space" }</code>, the extracted content for each block will be prefixed with one space for each character in the leading content from the original file to ensure that the character count remains the same as the original file.</li>
+</ul>
+<hr />
+<h3 id="compilercompiletowxmlcompiled-options">compiler.compileToWxml(compiled, [options])</h3>
+<p>Parse a AST（Abstract Syntax Tree）into a String which is the type of string of a WXML(WeiXin Markup Language) file.This is used after a template compiled into a AST with the function <code>compiler.compile(template, [options])</code> .</p>
+<h4 id="compiled">compiled</h4>
+<p><code>compiled</code> is the result of <a href="#compilercompiletemplate-options">compiler.compile</a>,with this function you can compile the <a href="#https://cn.vuejs.org/v2/guide/syntax.html">template</a> strings.</p>
+<h4 id="options_2">Options</h4>
+<ul>
+<li>components: <code>components</code> is an Object includes the properties of the components in the template where is the paramter <code>compiled</code> comes from.
+<code>components</code> is necessary if there are components declared in your vue file before compiling. The formate of <code>components</code> maybe like this:
+ <code>{
+ componentA: { src: '/components/coma', name: 'componentA' },
+ componentB: { src: '/components/comb', name: 'componentB' }
+ }</code></li>
+<li>moduleId: The unique identifier of component.Using <code>moduleId</code> you can inject an only name of components and when you use it in <code>[css scoped]</code> or <code>[css modules]</code> ,the style of component won't be covered.</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="http://mpvue.com/build/postcss-mpvue-wxss/">
+        <link rel="shortcut icon" href="../../assets/favicon.ico">
+        
+        <title>Postcss mpvue wxss - mpvue-docs</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../assets/style.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">mpvue-docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Build <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../">Home</a>
+</li>
+                            
+<li >
+    <a href="../mpvue-loader/">Mpvue loader</a>
+</li>
+                            
+<li >
+    <a href="../mpvue-webpack-target/">Mpvue webpack target</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Postcss mpvue wxss</a>
+</li>
+                            
+<li >
+    <a href="../px2rpx-loader/">Px2rpx loader</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mpvue <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../mpvue/">Home</a>
+</li>
+                            
+<li >
+    <a href="../../mpvue/mpvue-template-compiler/">Mpvue template compiler</a>
+</li>
+                            
+<li >
+    <a href="../../mpvue/quickstart/">Quickstart</a>
+</li>
+                            
+<li >
+    <a href="../../mpvue/simple/">Simple</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../mpvue-webpack-target/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../px2rpx-loader/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#postcss-wxss">PostCSS Wxss</a></li>
+            <li><a href="#_1">实现的功能</a></li>
+            <li><a href="#_2">例子</a></li>
+            <li><a href="#usage">Usage</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.5.28.js"></script>
+
+<script>
+Owl.start({
+    project: 'mpvue-doc',
+    pageUrl: 'build/postcss-mpvue-wxss'
+})
+</script>
+
+<h1 id="postcss-wxss">PostCSS Wxss</h1>
+<p><a href="https://github.com/postcss/postcss">PostCSS</a> plugin for wxss.</p>
+<p>专门为 wxss 格式化处理的的一个 postcss 插件，特别是在做 css 转 wxss 的时候好用到爆。</p>
+<h2 id="_1">实现的功能</h2>
+<ul>
+<li>清理 wxss 不支持的选择器。</li>
+<li>清理 wxss 不支持的注释。</li>
+<li>转换 rem 单位到 rpx。</li>
+<li>转换 Web 的标签选择器到小程序的 class 选择器。</li>
+<li>style scoped（postcss插件部分）。</li>
+</ul>
+<h2 id="_2">例子</h2>
+<pre><code class="css">/* 被清理 */
+* {
+  margin: 100px
+}
+
+/* 保持原样 */
+view {
+  width: 50rpx;
+}
+.container {
+  width: 7.5rem;
+  font-size: .24rem
+}
+
+/* Web 标签转换 */
+div {
+  width: 50rpx;
+}
+ul li {
+  width: 50rpx;
+}
+body {
+  width: 50rpx;
+}
+</code></pre>
+
+<pre><code class="css">view {
+  width: 50rpx;
+}
+.container {
+  width: 50rpx;
+  font-size: 24.4rpx
+}
+._div {
+  width: 50rpx;
+}
+._ul ._li {
+  width: 50rpx;
+}
+page {
+  width: 50rpx;
+}
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+<pre><code class="js">postcss([ require('postcss-mpvue-wxss') ])
+</code></pre>
+
+<p>or use <code>.postcssrc.js</code></p>
+<pre><code>// https://github.com/michael-ciniawsky/postcss-load-config
+const optopns = {}
+
+module.exports = {
+  &quot;plugins&quot;: {
+    // to edit target browsers: use &quot;browserslist&quot; field in package.json
+    &quot;postcss-mpvue-wxss&quot;: optopns
+  }
+}
+</code></pre>
+
+<p>with options:</p>
+<pre><code>const replaceTagSelectorMap = require('postcss-mpvue-wxss/lib/wxmlTagMap')
+
+const optopns = {
+  cleanSelector: ['*'],
+  remToRpx: 100,
+  replaceTagSelector: Object.assign(replaceTagSelectorMap, {
+    '*': 'view, text' // 将覆盖前面的 * 选择器被清理规则
+  })
+}
+</code></pre>
+
+<p>See <a href="https://github.com/postcss/postcss">PostCSS</a> docs for examples for your environment.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

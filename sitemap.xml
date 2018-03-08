@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>http://mpvue.com//</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>http://mpvue.com//build/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//build/mpvue-loader/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//build/mpvue-webpack-target/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//build/postcss-mpvue-wxss/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//build/px2rpx-loader/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>http://mpvue.com//mpvue/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//mpvue/mpvue-template-compiler/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//mpvue/quickstart/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://mpvue.com//mpvue/simple/</loc>
+     <lastmod>2018-03-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+</urlset>
