@@ -31,9 +31,9 @@ $(document).ready(function() {
     $('table').addClass('table table-striped table-hover');
 
 
-    $('body').on('click', 'img', function(){
-        window.open($(this).attr('src'));
-    });
+    // $('body').on('click', 'img', function(){
+    //     window.open($(this).attr('src'));
+    // });
 
     $('body').on('click', 'h2', function(){
         document.location.hash = $(this).attr('id');
