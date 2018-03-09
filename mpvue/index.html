@@ -139,7 +139,7 @@
         <ul class="menu-sub">
         
             <li>
-                <a href="#_2" class="sidebar-link">三分钟教程</a>
+                <a href="#_2" class="sidebar-link">五分钟教程</a>
                 <ul class="menu-sub">
                 
                 </ul>
@@ -274,7 +274,7 @@ Owl.start({
 <h1 id="_1">使用手册</h1>
 <p><code>mpvue</code> 继承自 <code>Vue.js</code>，其技术规范和语法特点与 <code>Vue.js</code> 保持一致。</p>
 <p>本文档适用于有一定 <code>Vue.js</code> 使用经验的开发者。我们默认你已经掌握 <code>Vue.js</code> 技术体系，<strong>如果你是新手</strong>，你可能需要先熟悉 <a href="https://cn.vuejs.org/guide/">Vue.js 官方文档</a>。</p>
-<h2 id="_2">三分钟教程</h2>
+<h2 id="_2">五分钟教程</h2>
 <p>通过 <code>Vue.js</code> 命令行工具 <a href="https://github.com/vuejs/vue-cli">vue-cli</a>，你只需在终端窗口输入几条简单命令，即可快速创建和启动一个带热重载、保存时静态检查、内置代码构建功能的小程序项目：</p>
 <pre><code class="bash"># 全局安装 vue-cli
 $ npm install --global vue-cli
@@ -487,7 +487,7 @@ $ npm run dev
 <p>如果未来小程序支持了动态增删改查 wxml 节点信息，那我们就能做到全支持。</p>
 <p>详细的不支持列表：</p>
 <ul>
-<li>不支持在 <strong>组件</strong> 在上定义 click 等原生事件和 class style 等样式属性，因为编译到 wxml，小程序不会生成节点，建议写在内部顶级元素上。</li>
+<li>暂不支持在组件引用时，在组件上定义 click 等原生事件、v-show（可用 v-if 代替）和 class style 等样式属性(例：<code>&lt;card class="class-name"&gt; &lt;/card&gt;</code> 样式是不会生效的)，因为编译到 wxml，小程序不会生成节点，建议写在内部顶级元素上。</li>
 <li>Slot（scoped 暂时还没做支持）</li>
 <li>动态组件</li>
 <li>异步组件</li>
