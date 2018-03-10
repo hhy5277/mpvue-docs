@@ -392,11 +392,11 @@ $ npm run dev
 <p>举例说明：</p>
 <pre><code class="html">&lt;template&gt;
     &lt;!-- 支持 --&gt;
-    &lt;div class=&quot;container {{ computedClassStr }}&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;container&quot; :class=&quot;computedClassStr&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;container&quot; :class=&quot;{active: isActive}&quot;&gt;&lt;/div&gt;
 
     &lt;!-- 不支持 --&gt;
-    &lt;div class=&quot;container {{ computedClassObject }}&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;container&quot; :class=&quot;computedClassObject&quot;&gt;&lt;/div&gt;
 &lt;/template&gt;
 &lt;script&gt;
     export default {
