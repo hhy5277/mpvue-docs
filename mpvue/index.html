@@ -393,9 +393,36 @@ $ npm run dev
 <h2 id="_8">计算属性</h2>
 <p>支持 <a href="https://cn.vuejs.org/v2/guide/computed.html">官方文档：计算属性</a>。</p>
 <h2 id="class-style">Class 与 Style 绑定</h2>
-<p>Class 与 Style 绑定的实现方式为使用正则匹配将 <code>v-bind:class="{ active: isActive, 'text-danger': hasError }"</code> 转化为 <code>class="{{isActive? 'active' : ''}} {{hasError ? 'text-danger' : ''}}"</code>, 正则的可靠性并不是很高，不建议这种写法，
-不是不支持 <a href="https://cn.vuejs.org/v2/guide/class-and-style.html">官方文档：Class 与 Style 绑定</a>，而是不支持部分特复杂的表达式。最佳实践用计算属性（computed）实现返回字符串。</p>
-<p>举例说明：</p>
+<p>为节约性能，我们将 Class 与 Style 的表达式通过 compiler 硬编码到 wxml 中，支持语法和转换效果如下：</p>
+<p>class 支持的语法:</p>
+<pre><code>&lt;p :class=&quot;{ active: isActive }&quot;&gt;111&lt;/p&gt;
+&lt;p class=&quot;static&quot; v-bind:class=&quot;{ active: isActive, 'text-danger': hasError }&quot;&gt;222&lt;/p&gt;
+&lt;p class=&quot;static&quot; :class=&quot;[activeClass, errorClass]&quot;&gt;333&lt;/p&gt;
+&lt;p class=&quot;static&quot; v-bind:class=&quot;[isActive ? activeClass : '', errorClass]&quot;&gt;444&lt;/p&gt;
+&lt;p class=&quot;static&quot; v-bind:class=&quot;[{ active: isActive }, errorClass]&quot;&gt;555&lt;/p&gt;
+</code></pre>
+
+<p>将分别被转换成:</p>
+<pre><code>&lt;view class=&quot;_p {{[isActive ? 'active' : '']}}&quot;&gt;111&lt;/view&gt;
+&lt;view class=&quot;_p static {{[isActive ? 'active' : '', hasError ? 'text-danger' : '']}}&quot;&gt;222&lt;/view&gt;
+&lt;view class=&quot;_p static {{[activeClass, errorClass]}}&quot;&gt;333&lt;/view&gt;
+&lt;view class=&quot;_p static {{[isActive ? activeClass : '', errorClass]}}&quot;&gt;444&lt;/view&gt;
+&lt;view class=&quot;_p static {{[[isActive ? 'active' : ''], errorClass]}}&quot;&gt;555&lt;/view&gt;
+</code></pre>
+
+<p>style 支持的语法:</p>
+<pre><code>&lt;p v-bind:style=&quot;{ color: activeColor, fontSize: fontSize + 'px' }&quot;&gt;666&lt;/p&gt;
+&lt;p v-bind:style=&quot;[{ color: activeColor, fontSize: fontSize + 'px' }]&quot;&gt;777&lt;/p&gt;
+</code></pre>
+
+<p>将分别被转换成:</p>
+<pre><code>&lt;view class=&quot;_p&quot; style=&quot; {{'color:' + activeColor + ';' + 'font-size:' + fontSize + 'px' + ';'}}&quot;&gt;666&lt;/view&gt;
+&lt;view class=&quot;_p&quot; style=&quot; {{'color:' + activeColor + ';' + 'font-size:' + fontSize + 'px' + ';'}}&quot;&gt;777&lt;/view&gt;
+</code></pre>
+
+<p>不支持 <a href="https://cn.vuejs.org/v2/guide/class-and-style.html">官方文档：Class 与 Style 绑定</a> 中的 <code>classObject</code> 和 <code>styleObject</code> 语法。</p>
+<p>最佳实践见上文支持的语法，<strong>从性能考虑，建议不要过度依赖此。</strong></p>
+<p>此外还可以用 computed 方法生成 class 或者 style 字符串，插入到页面中，举例说明：</p>
 <pre><code class="html">&lt;template&gt;
     &lt;!-- 支持 --&gt;
     &lt;div class=&quot;container&quot; :class=&quot;computedClassStr&quot;&gt;&lt;/div&gt;
@@ -486,6 +513,72 @@ $ npm run dev
 </ul>
 <h2 id="_13">表单控件绑定</h2>
 <p>几乎全支持 <a href="https://cn.vuejs.org/v2/guide/forms.html">官方文档：表单控件绑定</a>，不支持的还没测出来，之所以说几乎，是因为 WEB 表单这么复杂，谁特么知道会出什么奇怪的特性。</p>
+<p>建议开发过程中直接使用 <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/component/button.html">微信小程序：表单组件</a> 。用法示例：</p>
+<p><a href="https://github.com/Meituan-Dianping/mpvue/issues/58">select 组件用 picker 组件进行代替</a></p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div&gt;
+    &lt;picker @change=&quot;bindPickerChange&quot; :value=&quot;index&quot; :range=&quot;array&quot;&gt;
+      &lt;view class=&quot;picker&quot;&gt;
+        当前选择：{{array[index]}}
+      &lt;/view&gt;
+    &lt;/picker&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data () {
+    return {
+      index: 0,
+      array: ['A', 'B', 'C']
+    }
+  },
+  methods: {
+    bindPickerChange (e) {
+      console.log(e)
+    }
+  }
+}
+
+&lt;/script&gt;
+</code></pre>
+
+<p><a href="https://github.com/Meituan-Dianping/mpvue/issues/66">表单元素 radio 用 radio-group 组件进行代替</a></p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div&gt;
+    &lt;radio-group class=&quot;radio-group&quot; @change=&quot;radioChange&quot;&gt;
+      &lt;label class=&quot;radio&quot; v-for=&quot;(item, index) in items&quot; :key=&quot;item.name&quot;&gt;
+        &lt;radio :value=&quot;item.name&quot; :checked=&quot;item.checked&quot;/&gt; {{item.value}}
+      &lt;/label&gt;
+    &lt;/radio-group&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data () {
+    return {
+      items: [
+        {name: 'USA', value: '美国'},
+        {name: 'CHN', value: '中国', checked: 'true'},
+        {name: 'BRA', value: '巴西'},
+        {name: 'JPN', value: '日本'},
+        {name: 'ENG', value: '英国'},
+        {name: 'TUR', value: '法国'}
+      ]
+    }
+  },
+  methods: {
+    radioChange (e) {
+      console.log('radio发生change事件，携带value值为：', e.target.value)
+    }
+  }
+}
+
+&lt;/script&gt;
+
+</code></pre>
+
 <h2 id="_14">组件</h2>
 <h3 id="vue_1">Vue 组件</h3>
 <p>组件是整个 Vue.js 中最复杂的部分，当然要支持 <a href="https://cn.vuejs.org/v2/guide/components.html">官方文档：组件</a> 。</p>

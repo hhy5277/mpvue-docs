@@ -172,6 +172,27 @@
                 </ul>
             </li>
         
+            <li>
+                <a href="#page-onload-options" class="sidebar-link">如何获取小程序在 page onLoad 时候传递的 options</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+            <li>
+                <a href="#app-onlaunchonshow-options" class="sidebar-link">如何获取小程序在 app onLaunch/onShow 时候传递的 options</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+            <li>
+                <a href="#app-onerror" class="sidebar-link">如何捕获 app 的 onError</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
         </ul>
     
     </ul>
@@ -190,6 +211,9 @@ Owl.start({
 </script>
 
 <h1 id="_1">常见问题</h1>
+<blockquote>
+<p>如果这篇文档没找到您想要的内容，请到 <a href="https://github.com/Meituan-Dianping/mpvue/issues">mpvue/issues</a> 进行查找。</p>
+</blockquote>
 <h2 id="vue-router">vue-router 支持吗？</h2>
 <p>路由是不能支持的，因为小程序无法动态的插入和控制节点，几乎无法实现。而且小程序对页面的切换性能做了很多优化，页面切换体验也好了很多，所以使用 vue-router 也不那么必要</p>
 <h2 id="_2">为什么我新增了页面，没有反应？</h2>
@@ -198,6 +222,25 @@ Owl.start({
 <p>原理上是可以的，但是要去掉 Dom 和 Bom 相关的 API 操作，还要去掉 mpvue 不支持的一些 vue 特性，小程序不支持的 css 选择器等，去掉这些就可以使用了，欢迎大家贡献 mpvue 的 UI 组件库。</p>
 <h2 id="echarts">能否使用 echarts 等小程序原生组件？</h2>
 <p>可以，可以看下<a href="https://github.com/mpvue/examples/tree/master/echarts">demo</a></p>
+<h2 id="page-onload-options">如何获取小程序在 page onLoad 时候传递的 options</h2>
+<p>在所有 页面 的组件内可以通过 <code>this.$root.$mp.query</code> 进行获取。</p>
+<h2 id="app-onlaunchonshow-options">如何获取小程序在 app onLaunch/onShow 时候传递的 options</h2>
+<p>在所有的组件内可以通过 <code>this.$root.$mp.appOptions</code> 进行获取。</p>
+<h2 id="app-onerror">如何捕获 app 的 onError</h2>
+<p>由于 onError 并不是完整意义的生命周期，所以只提供一个捕获错误的方法，在 app 的根组件上添加名为 onError 的回调函数即可。如下：</p>
+<pre><code class="javascript">export default {
+   // 只有 app 才会有 onLaunch 的生命周期
+   onLaunch () {
+       // ...
+   },
+
+   // 捕获 app error
+   onError (err) {
+       console.log(err)
+   }
+}
+
+</code></pre>
 
 
 <div class="guide-links">
