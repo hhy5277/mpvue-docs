@@ -365,7 +365,7 @@ $ npm run dev
 <p><strong>注意点：</strong></p>
 <ol>
 <li>
-<p>不要选项属性或回调上使用箭头函数，比如 <code>created: () =&gt; console.log(this.a)</code> 或 <code>vm.$watch('a', newValue =&gt; this.myMethod())</code>。因为箭头函数是和父级上下文绑定在一起的，<code>this</code> 不会是如你做预期的 Vue 实例，且 <code>this.a</code> 或 <code>this.myMethod</code> 也会是未定义的。</p>
+<p>不要在选项属性或回调上使用箭头函数，比如 <code>created: () =&gt; console.log(this.a)</code> 或 <code>vm.$watch('a', newValue =&gt; this.myMethod())</code>。因为箭头函数是和父级上下文绑定在一起的，<code>this</code> 不会是如你做预期的 Vue 实例，且 <code>this.a</code> 或 <code>this.myMethod</code> 也会是未定义的。</p>
 </li>
 <li>
 <p>微信小程序的页面的 <code>query</code> 参数是通过 <code>onLoad</code> 获取的，mpvue 对此进行了优化，直接通过 <code>this.$root.$mp.query</code> 获取相应的参数数据，其调用需要在 <code>onLoad</code> 生命周期触发之后使用，比如 <code>onShow</code> 等，具体生命周期调用顺序，见下图。</p>
@@ -613,8 +613,7 @@ export default {
     &lt;view class=&quot;picker&quot;&gt;
       当前选择: {{date}}
     &lt;/view&gt;
-  &lt;/picker&gt;
-
+&lt;/picker&gt;
 </code></pre>
 
 <h2 id="_17">最佳实践</h2>
