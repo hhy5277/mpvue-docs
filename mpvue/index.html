@@ -173,7 +173,7 @@
                 <a href="#_6" class="sidebar-link">模板语法</a>
                 <ul class="menu-sub">
                 
-                  <li><a class="section-link" href="#-html">不支持 纯-HTML</a></li>
+                  <li><a class="section-link" href="#v-html">支持部分 V-HTML</a></li>
                 
                   <li><a class="section-link" href="#javascript">不支持部分复杂的 JavaScript 渲染表达式</a></li>
                 
@@ -379,8 +379,8 @@ $ npm run dev
 <p><img alt="" src="./../assets/lifecycle.jpg" /></p>
 <h2 id="_6">模板语法</h2>
 <p>几乎全支持 <a href="https://cn.vuejs.org/v2/guide/syntax.html">官方文档：模板语法</a>，下面讲下不支持的情况。</p>
-<h3 id="-html">不支持 <code>纯-HTML</code></h3>
-<p>小程序里所有的 BOM／DOM 都不能用，也就是说 <code>v-html</code> 指令不能用。</p>
+<h3 id="v-html">支持部分 <code>V-HTML</code></h3>
+<p>会将使用了 <code>v-html</code> 指令转化为小程序的 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html">rich-text</a> <code>1.0.9</code></p>
 <h3 id="javascript">不支持部分复杂的 JavaScript 渲染表达式</h3>
 <p>我们会把 template 中的 <code>{{}}</code> 双花括号的部分，直接编码到 wxml 文件中，由于微信小程序的能力限制(<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html">数据绑定</a>)，所以无法支持复杂的 JavaScript 表达式。</p>
 <p>目前可以使用的有 <code>+ - * % ?: ! == === &gt; &lt; [] .</code>，剩下的还待完善。</p>
@@ -513,7 +513,7 @@ $ npm run dev
 <li>事件修饰符<ul>
 <li><code>.stop</code> 的使用会阻止冒泡，但是同时绑定了一个非冒泡事件，会导致该元素上的 catchEventName 失效！</li>
 <li><code>.prevent</code> 可以直接干掉，因为小程序里没有什么默认事件，比如submit并不会跳转页面</li>
-<li><code>.capture</code> 不能做，因为小程序没有捕获类型的事件</li>
+<li><code>.capture</code> 支持 <code>1.0.9</code></li>
 <li><code>.self</code> 没有可以判断的标识</li>
 <li><code>.once</code> 也不能做，因为小程序没有 removeEventListener, 虽然可以直接在 handleProxy 中处理，但非常的不优雅，违背了原意，暂不考虑</li>
 </ul>
