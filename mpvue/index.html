@@ -467,7 +467,7 @@ $ npm run dev
 <p>全支持 <a href="https://cn.vuejs.org/v2/guide/list.html">官方文档：列表渲染</a></p>
 <p>只是需要注意一点，<strong>嵌套列表渲染，必须指定不同的索引！</strong></p>
 <p>示例：</p>
-<pre><code class="html">&lt;!-- 在这种嵌套循环的时候， index 和 itemIndex 这种索引是必须指定，且别名不能想同，正确的写法如下 --&gt;
+<pre><code class="html">&lt;!-- 在这种嵌套循环的时候， index 和 itemIndex 这种索引是必须指定，且别名不能相同，正确的写法如下 --&gt;
 &lt;template&gt;
     &lt;ul v-for=&quot;(card, index) in list&quot;&gt;
         &lt;li v-for=&quot;(item, itemIndex) in card&quot;&gt;
