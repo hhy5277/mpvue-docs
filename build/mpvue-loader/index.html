@@ -177,6 +177,25 @@
                 </ul>
             </li>
         
+            <li>
+                <a href="#typescript" class="sidebar-link">TypeScript支持</a>
+                <ul class="menu-sub">
+                
+                  <li><a class="section-link" href="#_4">配置</a></li>
+                
+                  <li><a class="section-link" href="#maints">main.ts</a></li>
+                
+                  <li><a class="section-link" href="#appvue">App.vue</a></li>
+                
+                  <li><a class="section-link" href="#_5">页面</a></li>
+                
+                  <li><a class="section-link" href="#_6">组件</a></li>
+                
+                  <li><a class="section-link" href="#demo">示例Demo</a></li>
+                
+                </ul>
+            </li>
+        
         </ul>
     
     </ul>
@@ -371,6 +390,210 @@ export default {
 <p>和 vue-loader 用法一致，讲讲额外注意的地方。</p>
 <h3 id="checkmpentry">checkMPEntry</h3>
 <p>在 <a href="../../build/#module">项目建构</a> 文档的这个部分，有讲到需要给所有 <code>js</code> 后缀文件增加 <code>mpvue-loader</code> ，并且需要加 options，通过这个配置，我们的 loader 才能知道 entry 进来的 js 和 vue 的类型是 app 还是 page，从而做了一些页面类型的区分。</p>
+<h2 id="typescript">TypeScript支持</h2>
+<p><code>mpvue-loader</code>目前支持用TypeScript来写，功能还在完善中(WIP)。目前实现了用<code>&lt;script lang="ts" src="./xx.ts"&gt;&lt;/script&gt;</code>这种方式的自动识别，并且需要搭配<a href="https://github.com/kaorun343/vue-property-decorator">vue-property-decorator</a>来使用。</p>
+<h3 id="_4">配置</h3>
+<h4 id="loader">添加对应的<code>loader</code></h4>
+<pre><code class="js">// webpack.conf.js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'mpvue-loader',
+        options: {
+          //...
+          ts: [ //添加对应vue的loader
+            'babel-loader',
+            {
+              // loader: 'ts-loader',
+              loader: 'awesome-typescript-loader',
+              options: {
+                // errorsAsWarnings: true,
+                useCache: true,
+              }
+            }
+          ]
+        }
+      },
+      // ts文件的loader
+      {
+        test: /\.tsx?$/, 
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'mpvue-loader',
+            options: {
+              checkMPEntry: true
+            }
+          },
+          {
+            // loader: 'ts-loader',
+            loader: 'awesome-typescript-loader',
+            options: {
+              // errorsAsWarnings: true,
+              useCache: true,
+            }
+          }
+        ]
+      },
+    ]
+  // ...
+  }
+</code></pre>
+
+<h3 id="maints">main.ts</h3>
+<pre><code class="ts">// main.ts
+import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator';
+import { VueConstructor } from &quot;vue&quot;;
+
+interface IMpVue extends VueConstructor {
+  mpType: string
+}
+
+// 添加小程序hooks http://mpvue.com/mpvue/#_4
+Component.registerHooks([
+  // app
+  'onLaunch', // 初始化
+  'onShow', // 当小程序启动，或从后台进入前台显示
+  'onHide', // 当小程序从前台进入后台
+  // pages
+  'onLoad', // 监听页面加载
+  'onShow', // 监听页面显示
+  'onReady', // 监听页面初次渲染完成
+  'onHide', // 监听页面隐藏
+  'onUnload', // 监听页面卸载
+  'onPullDownRefresh', // 监听用户下拉动作
+  'onReachBottom', // 页面上拉触底事件的处理函数
+  'onShareAppMessage', // 用户点击右上角分享
+  'onPageScroll', // 页面滚动
+  'onTabItemTap', //当前是 tab 页时， 点击 tab 时触发 （mpvue 0.0.16 支持）
+])
+
+Vue.config.productionTip = false
+// 在这个地方引入是为了registerHooks先执行
+const MyApp = require('./App.vue').default as IMpVue
+const app = new Vue(MyApp)
+app.$mount()
+</code></pre>
+
+<h3 id="appvue">App.vue</h3>
+<pre><code class="vue">&lt;script lang=&quot;ts&quot; src=&quot;./app.ts&quot;&gt;&lt;/script&gt;
+&lt;style&gt;&lt;/style&gt;
+</code></pre>
+
+<pre><code class="ts">//app.ts
+import { Vue, Component } from 'vue-property-decorator'
+declare module &quot;vue/types/vue&quot; {
+  interface Vue {
+    $mp: any;
+  }
+}
+
+// 必须使用装饰器的方式来指定components
+@Component({
+  mpType: 'app', // mpvue特定
+}as any)
+class App extends Vue {
+  // app hook
+  onLaunch() {
+    let opt = this.$root.$mp.appOptions
+  }
+
+  onShow() {
+  }
+
+  onHide() {
+  }
+
+  mounted() { // vue hook
+  }
+}
+
+export default App
+</code></pre>
+
+<h3 id="_5">页面</h3>
+<pre><code class="vue">&lt;!-- page.vue --&gt;
+&lt;template&gt;
+  &lt;div class=&quot;counter-warp&quot;&gt;
+    &lt;p&gt;Mpvue&lt;/p&gt;
+    &lt;p&gt;ts value {{ ver }}&lt;/p&gt;
+    &lt;card text=&quot;card component&quot;&gt;&lt;/card&gt;
+    &lt;comp-b text=&quot;card component&quot;&gt;&lt;/comp-b&gt;
+    &lt;a :href=&quot;AppUrls.COUNTER&quot; class=&quot;home&quot;&gt;去往vuex&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;!--必须指定为ts--&gt;
+&lt;script lang=&quot;ts&quot; src=&quot;./index.ts&quot;&gt;&lt;/script&gt;
+&lt;style&gt;&lt;/style&gt;
+</code></pre>
+
+<pre><code class="ts">// index.ts
+import { Vue, Component } from 'vue-property-decorator'
+import Card from '@/components/card.vue' // mpvue目前只支持的单文件组件
+import CompB from '@/components/compb.vue' // mpvue目前只支持的单文件组件
+// 必须使用装饰器的方式来指定component
+@Component({
+  components: {
+    Card,
+    CompB, //注意，vue的组件在template中的用法，`CompB` 会被转成 `comp-b`
+  },
+})
+class Index extends Vue {
+  ver: number = 123
+
+  onShow() { // 小程序 hook
+  }
+
+  mounted() { // vue hook
+  }
+}
+
+export default Index
+</code></pre>
+
+<h3 id="_6">组件</h3>
+<pre><code class="vue">&lt;!-- card.vue --&gt;
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;p class=&quot;card&quot;&gt;
+      From Card {{text}} {{ver}}
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;!--必须指定为ts--&gt;
+&lt;script lang=&quot;ts&quot; src=&quot;./card.ts&quot;&gt;&lt;/script&gt;
+&lt;style&gt;&lt;/style&gt;
+</code></pre>
+
+<pre><code class="ts">// card.ts
+import { Vue, Component, Prop } from 'vue-property-decorator'
+// 必须使用装饰器的方式来指定component
+@Component
+class Card extends Vue {
+  @Prop({ default: '1' }) //注意用法！
+  text: string;
+
+  ver: number = 2;
+
+  onShow() {
+  }
+
+  onHide() {
+  }
+
+  mounted() { // vue hook
+  }
+}
+
+export default CompB
+</code></pre>
+
+<h3 id="demo">示例Demo</h3>
+<p>示例: <a href="https://github.com/WingGao/mpvue-ts-demo">mpvue-ts-demo</a></p>
 
 
 <div class="guide-links">

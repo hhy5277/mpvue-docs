@@ -245,6 +245,13 @@
             </li>
         
             <li>
+                <a href="#typescript" class="sidebar-link">TypeScript支持</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+            <li>
                 <a href="#_17" class="sidebar-link">最佳实践</a>
                 <ul class="menu-sub">
                 
@@ -616,6 +623,8 @@ export default {
 &lt;/picker&gt;
 </code></pre>
 
+<h2 id="typescript">TypeScript支持</h2>
+<p>目前<code>mpvue-loader</code>是可以支持TypeScript选项的，配置方法<a href="../build/mpvue-loader/#typescript">在此</a>。具体Demo可以见<a href="https://github.com/WingGao/mpvue-ts-demo">mpvue-ts-demo</a></p>
 <h2 id="_17">最佳实践</h2>
 <p><strong>1. 精简 data 数据</strong></p>
 <p>冗余数据不要挂在 data 里，所有在 data/props/computed 中的数据，每次变更都会从微信小程序的 JSCore 进程，通过 setData 序列化成字符串后发送到 JSRender 进程。所以，如果你的数据量巨大的时候，会导致页面非常卡顿。</p>
