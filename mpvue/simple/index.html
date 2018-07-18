@@ -117,6 +117,12 @@
     
 
             
+                
+    
+    <li><a href="../../build/mpvue-lint/" class="nav-link">Mpvue lint</a></li>
+    
+
+            
           </ul>
         </li>
         
@@ -206,6 +212,11 @@ mpvueSimple.build({
   output: 'mp-pages',
   pageName: 'login'
 })
+
+// maybe you want to do something after building
+mpvueSimple.build()  // =&gt; Promise
+.then(() =&gt; console.log('mpvue build success'))
+.catch(err =&gt; throw new Error(err))
 </code></pre>
 
 <h4 id="api">API</h4>

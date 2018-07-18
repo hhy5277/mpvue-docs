@@ -6,11 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://mpvue.com/build/px2rpx-loader/">
+        <link rel="canonical" href="http://mpvue.com/build/mpvue-lint/">
         <link rel="shortcut icon" href="../../assets/favicon.ico">
         
 
-	<title>Px2rpx loader - mpvue-docs</title>
+	<title>Mpvue lint - mpvue-docs</title>
 
         <!-- <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -113,13 +113,13 @@
             
                 
     
-    <li><a href="./" class="nav-link">Px2rpx loader</a></li>
+    <li><a href="../px2rpx-loader/" class="nav-link">Px2rpx loader</a></li>
     
 
             
                 
     
-    <li><a href="../mpvue-lint/" class="nav-link">Mpvue lint</a></li>
+    <li><a href="./" class="nav-link">Mpvue lint</a></li>
     
 
             
@@ -146,7 +146,49 @@
     <ul class="nav menu-root">
     
         <li class="active">
-            <a href="#px2rpx-loader" class="sidebar-link">px2rpx-loader</a>
+            <a href="#mpvue-lint" class="sidebar-link">mpvue-lint</a>
+        </li>
+        <ul class="menu-sub">
+        
+        </ul>
+    
+        <li class="">
+            <a href="#mpvue-lint_1" class="sidebar-link">mpvue-lint 语法检查</a>
+        </li>
+        <ul class="menu-sub">
+        
+            <li>
+                <a href="#npm-install-mpvue-lint" class="sidebar-link">使用方法 npm install mpvue-lint</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+        </ul>
+    
+        <li class="">
+            <a href="#mpvue-trace" class="sidebar-link">mpvue-trace 内存检查</a>
+        </li>
+        <ul class="menu-sub">
+        
+            <li>
+                <a href="#npm-install-mpvue-lint_1" class="sidebar-link">使用方法 npm install mpvue-lint</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+            <li>
+                <a href="#_1" class="sidebar-link">使用注意！</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+        </ul>
+    
+        <li class="">
+            <a href="#_2" class="sidebar-link">源码</a>
         </li>
         <ul class="menu-sub">
         
@@ -158,25 +200,62 @@
                     
 <div class="content guide with-sidebar">
 
-<script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.5.28.js"></script>
-
-<script>
-Owl.start({
-    project: 'mpvue-doc',
-    pageUrl: 'build/px2rpx-loader'
+<h1 id="mpvue-lint">mpvue-lint</h1>
+<blockquote>
+<p>针对很多需要h5和小程序页面同构开发的场景，开发者会出现很多h5的vue组件直接搬到mpvue中调试的开发流程。虽然mpvue支持大部分的vue语法，但是仍有些边界
+情况需要开发者自行处理。为了提升开发效率，我们提供mpvue-lint插件。目前有两个功能模块，语法检查模块和内存检查模块</p>
+</blockquote>
+<h1 id="mpvue-lint_1">mpvue-lint 语法检查</h1>
+<p>语法检查模块,mpvue-lint检测h5版本的vue组件是否符合mpvue语法规则</p>
+<h2 id="npm-install-mpvue-lint">使用方法 npm install mpvue-lint</h2>
+<p>构建流中调用，传入entry(array) ,要检查的入口Vue文件列表 ,示例代码：</p>
+<pre><code class="javascript">const mpvueLint = require('mpvue-lint')
+mpvueLint.build(
+{
+    entry:
+    [
+       path.resolve('mpvue/page/worldcup/home/index.vue'),
+       path.resolve('mpvue/page/worldcup/card_detail/index.vue'),
+       path.resolve('mpvue/page/worldcup/activity_rules/index.vue')
+    ]
 })
-</script>
+</code></pre>
 
-<h1 id="px2rpx-loader">px2rpx-loader</h1>
-<p>同 <a href="https://github.com/songsiqi/px2rem">px2rem</a> 一摸一样的用法，唯一的差异在于我们改变了部分内部实现，使其更好的展现在小程序中。</p>
+<p>如果有引用路径的错误，会报白色提示</br>
+如果有template错误，比如组件上用class,绑定click事件等会报<strong>红色</strong>错误名，文件名，和组件名</br>
+如果Vue文件方法里有写法错误，如使用zepto,window,document等，会报<strong>红色</strong>错误名，文件名，方法名，行号</br>
+如果想自定义需要报错的函数调用，请按照<strong>mpvuelint.json</strong>里的格式添加你的函数名，例如,"zepto":true会在 vue文件中所有调用zepto的地方报错提醒</br>
+lint检查非强制阻拦编译过程，FE同学自己根据提醒修改业务代码</p>
+<p>运行结果如图：</br>
+<img src="../../assets/mpvue-lint/1.png" width="800" alt="语法检查"></p>
+<h1 id="mpvue-trace">mpvue-trace 内存检查</h1>
+<blockquote>
+<p>内存检查模块,mpvue-trace辅助开发者检查操作时数据更新的变化，因为最后小程序更新数据需要调用setData接口，而setData小程序真机是
+通过把JSON对象转换字符串传递给实际的页面的，大块数据会造成页面卡顿，甚至极端情况会造成页面少渲染一部分(更新数据过大会丢弃一部分更新)。
+为了开发者更直观看到mpvue页面每次更新数据量，这个插件会检查每次数据更新后500ms内整个页面的数据更新总量。</p>
+</blockquote>
+<h2 id="npm-install-mpvue-lint_1">使用方法 npm install mpvue-lint</h2>
+<p>在mpvue/你的工作目录/你的页面目录/main.js中加入如下引用</p>
+<pre><code class="javascript">const mpvueTrace = require('mpvue-lint/mpvue-trace')
+mpvueTrace.trace(Vue); //Vue是当前页面中的Vue实例
+</code></pre>
+
+<h2 id="_1">使用注意！</h2>
+<p>上面的调试代码会监听Vue.$updateDataToMP方法并把更新数据转字符串计算大小，会有一定性能损耗，仅做调试trace用，<strong>上线代码一定要去除</strong>。</p>
+<h1 id="_2">源码</h1>
+<blockquote>
+<p>mpvue-lint的源码已在github上开源<a href="https://github.com/mpvue/mpvue-lint">github 地址请参见</a> 欢迎开发者们根据自己项目的情况灵活增减功能</p>
+</blockquote>
+<p>源码基本原理图：</br>
+<img src="../../assets/mpvue-lint/2.jpg" style="margin:0 auto;display:block;" width="400" alt="语法检查流程"></p>
 
 
 <div class="guide-links">
     
-  <span>← <a href="../postcss-mpvue-wxss/">Postcss mpvue wxss</a></span>
+  <span>← <a href="../px2rpx-loader/">Px2rpx loader</a></span>
     
   
-  <span style="float:right"><a href="../mpvue-lint/">Mpvue lint</a> →</span>
+  <span style="float:right"><a href="../../qa/">Q&A</a> →</span>
   
 </div>
 
