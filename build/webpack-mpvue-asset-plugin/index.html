@@ -6,11 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://mpvue.com/build/mpvue-webpack-target/">
+        <link rel="canonical" href="http://mpvue.com/build/webpack-mpvue-asset-plugin/">
         <link rel="shortcut icon" href="../../assets/favicon.ico">
         
 
-	<title>Mpvue webpack target - mpvue-docs</title>
+	<title>Webpack mpvue asset plugin - mpvue-docs</title>
 
         <!-- <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -101,7 +101,7 @@
             
                 
     
-    <li><a href="./" class="nav-link">Mpvue webpack target</a></li>
+    <li><a href="../mpvue-webpack-target/" class="nav-link">Mpvue webpack target</a></li>
     
 
             
@@ -125,7 +125,7 @@
             
                 
     
-    <li><a href="../webpack-mpvue-asset-plugin/" class="nav-link">Webpack mpvue asset plugin</a></li>
+    <li><a href="./" class="nav-link">Webpack mpvue asset plugin</a></li>
     
 
             
@@ -152,12 +152,12 @@
     <ul class="nav menu-root">
     
         <li class="active">
-            <a href="#mpvue-webpack-target" class="sidebar-link">mpvue-webpack-target</a>
+            <a href="#webpack-mpvue-plugin" class="sidebar-link">webpack-mpvue-plugin</a>
         </li>
         <ul class="menu-sub">
         
             <li>
-                <a href="#_1" class="sidebar-link">实现的功能</a>
+                <a href="#_1" class="sidebar-link">使用示例：</a>
                 <ul class="menu-sub">
                 
                 </ul>
@@ -171,36 +171,32 @@
                     
 <div class="content guide with-sidebar">
 
-<script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.5.28.js"></script>
-
-<script>
-Owl.start({
-    project: 'mpvue-doc',
-    pageUrl: 'build/mpvue-webpack-target'
-})
-</script>
-
-<h1 id="mpvue-webpack-target">mpvue-webpack-target</h1>
+<h1 id="webpack-mpvue-plugin">webpack-mpvue-plugin</h1>
 <blockquote>
-<p>专为微信小程序做的 webpack 的 构建目标(Targets)。</p>
+<p>mpvue 资源路径解析插件</p>
 </blockquote>
-<p>如果你不了解什么是 webpack, 可以查看 <a href="https://doc.webpack-china.org/">webpack文档</a> 。</p>
-<p>如果不了解什么又是 target，可以查看文档 <a href="https://doc.webpack-china.org/configuration/target/">构建目标(Targets)</a>。</p>
-<h2 id="_1">实现的功能</h2>
-<p>修改自 <a href="https://github.com/webpack/webpack/blob/4c6eb6f39f82096bfafe75f98f1007e28a88d366/lib/JsonpTemplatePlugin.js">webpack/lib/JsonpTemplatePlugin.js</a> 中关于 target 为 web 部分的源码。</p>
-<ul>
-<li>主要兼容微信小程序中的全局变量。例如把 window 修改为 global 。</li>
-<li>不支持 DOM 和 DOM 方法，不能进行热更替，注释部分功能。</li>
-<li>触发 webpack 打包后的启动器。</li>
-</ul>
+<h2 id="_1">使用示例：</h2>
+<pre><code class="js">const MpvuePlugin = require('webpack-mpvue-asset-plugin')
+// webpack config
+{
+  entry: [],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'foo.bundle.js'
+  },
+  plugins: [
+    new MpvuePlugin()
+  ]
+};
+</code></pre>
 
 
 <div class="guide-links">
     
-  <span>← <a href="../mpvue-loader/">Mpvue loader</a></span>
+  <span>← <a href="../mpvue-lint/">Mpvue lint</a></span>
     
   
-  <span style="float:right"><a href="../postcss-mpvue-wxss/">Postcss mpvue wxss</a> →</span>
+  <span style="float:right"><a href="../../qa/">Q&A</a> →</span>
   
 </div>
 

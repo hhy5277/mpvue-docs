@@ -123,6 +123,12 @@
     
 
             
+                
+    
+    <li><a href="../webpack-mpvue-asset-plugin/" class="nav-link">Webpack mpvue asset plugin</a></li>
+    
+
+            
           </ul>
         </li>
         
@@ -328,6 +334,9 @@ export default {
 <h3 id="wxss">wxss</h3>
 <p>这个部分的处理同 web 的处理差异不大，唯一不同在于通过配置生成 <code>.css</code> 为 <code>.wxss</code> ，其中的对于 css 的若干处理，在 <a href="../../build/postcss-mpvue-wxss/">postcss-mpvue-wxss</a> 和 <a href="../../build/px2rpx-loader/">px2rpx-loader</a> 这两部分的文档中又详细的介绍。</p>
 <h3 id="appjsonpagejson">app.json／page.json</h3>
+<p><code>1.1.1 以上</code></p>
+<p>推荐和小程序一样，将 app.json／page.json 放到页面入口处，使用 copy-webpack-plugin copy 到对应的生成位置。</p>
+<p><code>1.1.1 以下</code></p>
 <p>这部分内容来源于 app 和 page 的 entry 文件，通常习惯是 main.js，你需要在你的入口文件中 <code>export default { config: {} }</code>，这才能被我们的 loader 识别为这是一个配置，需要写成 json 文件。</p>
 <pre><code class="javascript">import Vue from 'vue';
 import App from './app';
