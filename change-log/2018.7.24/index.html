@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="http://mpvue.com/change-log/2018.7.24/">
+        <link rel="shortcut icon" href="../../assets/favicon.ico">
+        
+
+	<title>mpvue-docs</title>
+
+        <!-- <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet"> -->
+        <link href="../../css/page.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../assets/style.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        
+
+<div id="header">
+    <a id="logo" href="../..">
+        <!-- <img src="../../img/logo.png"> -->
+        <span>mpvue-docs</span>
+    </a>
+    <ul id="nav">
+        <li>
+          <form id="search-form" role="form">
+            <input type="text" placeholder="Search..." id="mkdocs-search-query-input" class="st-default-search-input" autocomplete="off" autocorrect="off" autocapitalize="off">
+          </form>
+        </li>
+
+    
+        
+            
+            <li><a href="../.." class="nav-link ">Home</a></li>
+            
+        
+    
+        
+        <li class="nav-dropdown-container">
+          <a class="nav-link" href="../../mpvue/">Mpvue</a><span class="arrow"></span>
+          <ul class="nav-dropdown">
+            
+                
+    
+    <li><a href="../../mpvue/" class="nav-link">Home</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../mpvue/mpvue-template-compiler/" class="nav-link">Mpvue template compiler</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../mpvue/quickstart/" class="nav-link">Quickstart</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../mpvue/simple/" class="nav-link">Simple</a></li>
+    
+
+            
+          </ul>
+        </li>
+        
+    
+        
+        <li class="nav-dropdown-container">
+          <a class="nav-link" href="../../build/">Build</a><span class="arrow"></span>
+          <ul class="nav-dropdown">
+            
+                
+    
+    <li><a href="../../build/" class="nav-link">Home</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../build/mpvue-loader/" class="nav-link">Mpvue loader</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../build/mpvue-webpack-target/" class="nav-link">Mpvue webpack target</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../build/postcss-mpvue-wxss/" class="nav-link">Postcss mpvue wxss</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../build/px2rpx-loader/" class="nav-link">Px2rpx loader</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../build/mpvue-lint/" class="nav-link">Mpvue lint</a></li>
+    
+
+            
+                
+    
+    <li><a href="../../build/webpack-mpvue-asset-plugin/" class="nav-link">Webpack mpvue asset plugin</a></li>
+    
+
+            
+          </ul>
+        </li>
+        
+    
+        
+            
+            <li><a href="../../qa/" class="nav-link ">Q&A</a></li>
+            
+        
+    
+        
+            
+            <li><a href="../" class="nav-link ">Change log</a></li>
+            
+        
+    
+        
+            
+            <li><a href="./" class="nav-link current"></a></li>
+            
+        
+    
+
+    </ul>
+    <span class="github"><a href="https://github.com/Meituan-Dianping/mpvue"> <img src="../../img/github.svg"/></a></span>
+</div>
+
+        
+            <div id="main" class="">
+                
+                    <div class="sidebar bs-sidebar">
+  <div class="list">
+    <ul class="nav menu-root">
+    
+        <li class="active">
+            <a href="#mpvue-loader112-rc4" class="sidebar-link">mpvue-loader@1.1.2-rc.4+ 升级指南</a>
+        </li>
+        <ul class="menu-sub">
+        
+            <li>
+                <a href="#_1" class="sidebar-link">不兼容的地方</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+            <li>
+                <a href="#_2" class="sidebar-link">那些坑</a>
+                <ul class="menu-sub">
+                
+                </ul>
+            </li>
+        
+            <li>
+                <a href="#webpack" class="sidebar-link">webpack 配置配合升级指南</a>
+                <ul class="menu-sub">
+                
+                  <li><a class="section-link" href="#buildwebpackbaseconfjs">build/webpack.base.conf.js</a></li>
+                
+                  <li><a class="section-link" href="#buildwebpackdevconfjs">build/webpack.dev.conf.js</a></li>
+                
+                  <li><a class="section-link" href="#buildwebpackprodconfjs">build/webpack.prod.conf.js</a></li>
+                
+                  <li><a class="section-link" href="#configindexjs">config/index.js</a></li>
+                
+                  <li><a class="section-link" href="#packagejson">package.json</a></li>
+                
+                  <li><a class="section-link" href="#srcmainjs">src/main.js</a></li>
+                
+                  <li><a class="section-link" href="#srcmainjson">src/main.json</a></li>
+                
+                </ul>
+            </li>
+        
+        </ul>
+    
+    </ul>
+  </div>
+</div>
+                    
+<div class="content guide with-sidebar">
+
+<h2 id="mpvue-loader112-rc4">mpvue-loader@1.1.2-rc.4+ 升级指南</h2>
+<blockquote>
+<p>本次升级意在调整生成文件目录结构，对依赖的文件由原来的写死绝对路径该改为相对路径，1.1.x 版本还不是很稳定，对稳定性要求较高的项目建议暂时使用 1.0.x 版本</p>
+</blockquote>
+<h3 id="_1">不兼容的地方</h3>
+<ol>
+<li>mpvue-loader@1.1.2-rc.4+ 依赖 webpack-mpvue-asset-plugin@0.1.1+ 做依赖资源引用</li>
+<li>之前写在 main.js 中的 config 信息，需要在 main.js 同级目录下新建 main.json 文件，使用 webapck-copy-plugin copy 到 build 目录下</li>
+</ol>
+<h3 id="_2">那些坑</h3>
+<ol>
+<li>app.json 中引用的图片不会自动 copy 到 dist 目录下
+  json 配置文件是由 webapck-copy-plugin copy 过去的，不会处理依赖，可以将图片放到根目录下 static 目录下，使用 webapck-copy-plugin copy 过去</li>
+</ol>
+<h3 id="webpack">webpack 配置配合升级指南</h3>
+<h4 id="buildwebpackbaseconfjs">build/webpack.base.conf.js</h4>
+<pre><code class="js">// build/webpack.base.conf.js
+
++var CopyWebpackPlugin = require('copy-webpack-plugin')
++var configFilesArray = []
++var relative = require('relative')
+
+ function resolve (dir) {
+   return path.join(__dirname, '..', dir)
+ }
+
+-function getEntry (rootSrc, pattern) {
+-  var files = glob.sync(path.resolve(rootSrc, pattern))
+-  return files.reduce((res, file) =&gt; {
+-    var info = path.parse(file)
+-    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
+-    res[key] = path.resolve(file)
+-    return res
+-  }, {})
++function getEntry (rootSrc) {
++  var map = {};
++  glob.sync(rootSrc + '/pages/**/main.js')
++  .forEach(file =&gt; {
++    var key = relative(rootSrc, file).replace('.js', '');
++    map[key] = file;
++  })
++  glob.sync(rootSrc + '/pages/**/main.json') // 获取需要 copy 的 main.json
++  .forEach(file =&gt; {
++    configFilesArray.push({
++      from: file,
++      to: relative(rootSrc, file)
++    })
++   })
++   return map;
+ }
+
+const appEntry = { app: resolve('./src/main.js') }
++configFilesArray.push({
++    from: resolve('./src/main.json'),
++    to: 'app.json'
++})
+ const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
+ const entry = Object.assign({}, appEntry, pagesEntry)
+
+@@ -108,6 +122,14 @@ module.exports = {
+     ]
+   },
+   plugins: [
+-    new MpvuePlugin()
++    new MpvuePlugin(),
++    new CopyWebpackPlugin(configFilesArray),
++    new CopyWebpackPlugin([ // 处理 main.json 里面引用的图片，不要放代码中引用的图片
++      {
++        from: path.resolve(__dirname, '../static'),
++        to: path.resolve(__dirname, '../dist/static'),
++        ignore: ['.*']
++      }
++    ])
+   ]
+ }
+</code></pre>
+
+<h4 id="buildwebpackdevconfjs">build/webpack.dev.conf.js</h4>
+<p>修改生成文件的路径，让生成的文件路径可以放在原来的 page 下面</p>
+<pre><code class="js">module.exports = merge(baseWebpackConfig, {
+   devtool: '#source-map',
+   output: {
+     path: config.build.assetsRoot,
+-    filename: utils.assetsPath('js/[name].js'),
+-    chunkFilename: utils.assetsPath('js/[id].js')
++    filename: utils.assetsPath('[name].js'),
++    chunkFilename: utils.assetsPath('[id].js')
+   },
+   plugins: [
+     new webpack.DefinePlugin({
+@@ -42,8 +42,8 @@ module.exports = merge(baseWebpackConfig, {
+     // copy from ./webpack.prod.conf.js
+     // extract css into its own file
+     new ExtractTextPlugin({
+-      filename: utils.assetsPath('css/[name].wxss')
++      filename: utils.assetsPath('[name].wxss')
+     }),
+@@ -53,7 +53,7 @@ module.exports = merge(baseWebpackConfig, {
+       }
+     }),
+     new webpack.optimize.CommonsChunkPlugin({
+-      name: 'vendor',
++      name: 'common/vendor',
+       minChunks: function (module, count) {
+         // any required modules inside node_modules are extracted to vendor
+         return (
+@@ -64,17 +64,9 @@ module.exports = merge(baseWebpackConfig, {
+       }
+     }),
+     new webpack.optimize.CommonsChunkPlugin({
+-      name: 'manifest',
+-      chunks: ['vendor']
++      name: 'common/manifest',
++      chunks: ['common/vendor']
+     }),
+-    // copy custom static assets
+-    new CopyWebpackPlugin([
+-      {
+-        from: path.resolve(__dirname, '../static'),
+-        to: config.build.assetsSubDirectory,
+-        ignore: ['.*']
+-      }
+-    ]),
+</code></pre>
+
+<h4 id="buildwebpackprodconfjs">build/webpack.prod.conf.js</h4>
+<p>同 build/webpack.dev.conf.js 一样</p>
+<pre><code class="js">@@ -24,10 +24,10 @@ var webpackConfig = merge(baseWebpackConfig, {
+   devtool: config.build.productionSourceMap ? '#source-map' : false,
+   output: {
+     path: config.build.assetsRoot,
+-    filename: utils.assetsPath('js/[name].js'),
+-    chunkFilename: utils.assetsPath('js/[id].js')
++    filename: utils.assetsPath('[name].js'),
++    chunkFilename: utils.assetsPath('[id].js')
+   },
+   plugins: [
+     // http://vuejs.github.io/vue-loader/en/workflow/production.html
+@@ -39,8 +39,8 @@ var webpackConfig = merge(baseWebpackConfig, {
+     }),
+     // extract css into its own file
+     new ExtractTextPlugin({
+-      // filename: utils.assetsPath('css/[name].[contenthash].css')
+-      filename: utils.assetsPath('css/[name].wxss')
++      // filename: utils.assetsPath('[name].[contenthash].css')
++      filename: utils.assetsPath('[name].wxss')
+     }),
+     // Compress extracted CSS. We are using this plugin so that possible
+     // duplicated CSS from different components can be deduped.
+@@ -72,7 +72,7 @@ var webpackConfig = merge(baseWebpackConfig, {
+     new webpack.HashedModuleIdsPlugin(),
+     // split vendor js into its own file
+     new webpack.optimize.CommonsChunkPlugin({
+-      name: 'vendor',
++      name: 'common/vendor',
+       minChunks: function (module, count) {
+         // any required modules inside node_modules are extracted to vendor
+         return (
+@@ -85,17 +85,9 @@ var webpackConfig = merge(baseWebpackConfig, {
+     // extract webpack runtime and module manifest to its own file in order to
+     // prevent vendor hash from being updated whenever app bundle is updated
+     new webpack.optimize.CommonsChunkPlugin({
+-      name: 'manifest',
+-      chunks: ['vendor']
+-    }),
++      name: 'common/manifest',
++      chunks: ['common/vendor']
++    })
+-    // copy custom static assets
+-    new CopyWebpackPlugin([
+-      {
+-        from: path.resolve(__dirname, '../static'),
+-        to: config.build.assetsSubDirectory,
+-        ignore: ['.*']
+-      }
+-    ])
+   ]
+ })
+</code></pre>
+
+<h4 id="configindexjs">config/index.js</h4>
+<pre><code class="js"> module.exports = {
+     env: require('./prod.env'),
+     index: path.resolve(__dirname, '../dist/index.html'),
+     assetsRoot: path.resolve(__dirname, '../dist'),
+-    assetsSubDirectory: 'static', // 不将资源聚合放在 static 目录下
++    assetsSubDirectory: '',
+     assetsPublicPath: '/',
+     productionSourceMap: false,
+     // Gzip off by default as many popular static hosts such as
+@@ -26,7 +26,7 @@ module.exports = {
+     port: 8080,
+     // 在小程序开发者工具中不需要自动打开浏览器
+     autoOpenBrowser: false,
+-    assetsSubDirectory: 'static', // 不将资源聚合放在 static 目录下
++    assetsSubDirectory: '',
+     assetsPublicPath: '/',
+     proxyTable: {},
+     // CSS Sourcemaps off by default because relative paths are &quot;buggy&quot;
+</code></pre>
+
+<h4 id="packagejson">package.json</h4>
+<p>升级：
+"mpvue-loader": "^1.1.1-rc.4"
+"webpack-mpvue-asset-plugin": "^0.1.1"</p>
+<p>新增：
+"relative": "^3.0.2"</p>
+<h4 id="srcmainjs">src/main.js</h4>
+<p>删除 config</p>
+<pre><code class="js">-export default {
+-  // 这个字段走 app.json
+-  config: {
+-    // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
+-    pages: ['pages/logs/main', '^pages/index/main'],
+-    window: {
+-      backgroundTextStyle: 'light',
+-      navigationBarBackgroundColor: '#fff',
+-      navigationBarTitleText: 'WeChat',
+-      navigationBarTextStyle: 'black'
+-    }
+-  }
+-}
+</code></pre>
+
+<h4 id="srcmainjson">src/main.json</h4>
+<p>将原 js 中的 config 迁移到 main.json 文件中</p>
+<pre><code class="js">+{
++  &quot;pages&quot;: [
++    &quot;pages/index/main&quot;,
++    &quot;pages/counter/main&quot;,
++    &quot;pages/logs/main&quot;
++  ],
++  &quot;window&quot;: {
++    &quot;backgroundTextStyle&quot;: &quot;light&quot;,
++    &quot;navigationBarBackgroundColor&quot;: &quot;#fff&quot;,
++    &quot;navigationBarTitleText&quot;: &quot;WeChat&quot;,
++    &quot;navigationBarTextStyle&quot;: &quot;black&quot;
++  }
++}
+</code></pre>
+
+
+<div class="guide-links">
+    
+  <span>← <a href="../">Change log</a></span>
+    
+  
+</div>
+
+
+</div>
+                
+            </div>
+        
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true" style="display:none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form" onsubmit="return false">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
