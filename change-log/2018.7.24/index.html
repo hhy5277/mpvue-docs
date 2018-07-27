@@ -230,7 +230,6 @@
 <pre><code class="js">// build/webpack.base.conf.js
 
 +var CopyWebpackPlugin = require('copy-webpack-plugin')
-+var configFilesArray = []
 +var relative = require('relative')
 
  function resolve (dir) {
@@ -252,21 +251,10 @@
 +    var key = relative(rootSrc, file).replace('.js', '');
 +    map[key] = file;
 +  })
-+  glob.sync(rootSrc + '/pages/**/main.json') // 获取需要 copy 的 main.json
-+  .forEach(file =&gt; {
-+    configFilesArray.push({
-+      from: file,
-+      to: relative(rootSrc, file)
-+    })
-+   })
 +   return map;
  }
 
 const appEntry = { app: resolve('./src/main.js') }
-+configFilesArray.push({
-+    from: resolve('./src/main.json'),
-+    to: 'app.json'
-+})
  const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
  const entry = Object.assign({}, appEntry, pagesEntry)
 
@@ -276,7 +264,12 @@ const appEntry = { app: resolve('./src/main.js') }
    plugins: [
 -    new MpvuePlugin()
 +    new MpvuePlugin(),
-+    new CopyWebpackPlugin(configFilesArray),
++    new CopyWebpackPlugin([{
++      from: '**/*.json',
++      to: ''
++    }], {
++      context: 'src/'
++    })
 +    new CopyWebpackPlugin([ // 处理 main.json 里面引用的图片，不要放代码中引用的图片
 +      {
 +        from: path.resolve(__dirname, '../static'),
