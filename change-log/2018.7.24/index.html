@@ -198,7 +198,7 @@
                 
                   <li><a class="section-link" href="#srcmainjs">src/main.js</a></li>
                 
-                  <li><a class="section-link" href="#srcmainjson">src/main.json</a></li>
+                  <li><a class="section-link" href="#srcappjson">src/app.json</a></li>
                 
                 </ul>
             </li>
@@ -428,8 +428,8 @@ const appEntry = { app: resolve('./src/main.js') }
 -}
 </code></pre>
 
-<h4 id="srcmainjson">src/main.json</h4>
-<p>将原 js 中的 config 迁移到 main.json 文件中</p>
+<h4 id="srcappjson">src/app.json</h4>
+<p>将原 src/main.js 中的 config 迁移到 app.json 文件中（页面 JS 中的配置迁移到 main.json 中）</p>
 <pre><code class="js">+{
 +  &quot;pages&quot;: [
 +    &quot;pages/index/main&quot;,
